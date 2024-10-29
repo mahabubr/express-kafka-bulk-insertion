@@ -1,4 +1,4 @@
-import { Kafka } from "kafkajs";
+import { Kafka, logLevel } from "kafkajs";
 
 const kafka = new Kafka({
   clientId: "express-kafka-bulk-insertion",

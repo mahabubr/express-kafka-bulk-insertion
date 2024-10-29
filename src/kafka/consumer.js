@@ -6,7 +6,7 @@ const consumer = kafka.consumer({ groupId: "bulk-insert-group" });
 export async function connectConsumer() {
   await consumer.connect();
   await consumer.subscribe({ topic: "bulk-insert-topic", fromBeginning: true });
-  console.log("Kafka Consumer Connected");
+  console.log("🔥 Kafka Consumer Connected");
 
   let messages = [];
 
