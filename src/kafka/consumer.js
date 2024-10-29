@@ -11,8 +11,18 @@ export async function connectConsumer() {
   let messages = [];
 
   consumer.run({
-    eachMessage: async ({ message }) => {
-      messages.push(JSON.parse(message.value.toString()));
+    autoCommit: true,
+    eachMessage: async ({ message, pause }) => {
+      try {
+        console.log("🤞 New Message Received");
+        messages.push(JSON.parse(message.value.toString()));
+      } catch (error) {
+        console.log(error);
+        pause();
+        setTimeout(() => {
+          consumer.resume([{ topic: "bulk-insert-topic" }]);
+        }, 60 * 1000);
+      }
     },
   });
 
